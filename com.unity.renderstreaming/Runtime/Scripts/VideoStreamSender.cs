@@ -238,6 +238,7 @@ namespace Unity.RenderStreaming
             get { return m_WebCamDeviceIndex; }
             set
             {
+                return; /*
                 if (m_WebCamDeviceIndex == value)
                     return;
                 m_WebCamDeviceIndex = value;
@@ -247,12 +248,14 @@ namespace Unity.RenderStreaming
 
                 var op = CreateTrack();
                 StartCoroutineWithCallback(op, _ => ReplaceTrack(_.Track));
+                */
             }
         }
 
         /// <summary>
         ///
         /// </summary>
+        /*
         public WebCamTexture sourceWebCamTexture
         {
             get
@@ -264,6 +267,7 @@ namespace Unity.RenderStreaming
                 return null;
             }
         }
+        */
 
 
         /// <summary>
@@ -480,7 +484,9 @@ namespace Unity.RenderStreaming
                 case VideoStreamSource.Texture:
                     return new VideoStreamSourceTexture(this);
                 case VideoStreamSource.WebCamera:
+                    break; /*
                     return new VideoStreamSourceWebCam(this);
+                    */
             }
             throw new InvalidOperationException("");
         }
@@ -736,7 +742,7 @@ namespace Unity.RenderStreaming
                 Dispose();
             }
         }
-
+        /*
         class VideoStreamSourceWebCam : VideoStreamSourceImpl, IDisposable
         {
             int m_deviceIndex;
@@ -836,7 +842,7 @@ namespace Unity.RenderStreaming
                 Dispose();
             }
         }
-
+        */
         internal IEnumerable<RTCRtpCodecCapability> SelectCodecCapabilities(IEnumerable<VideoCodecInfo> codecs)
         {
             return RTCRtpSender.GetCapabilities(TrackKind.Video).SelectCodecCapabilities(codecs);
