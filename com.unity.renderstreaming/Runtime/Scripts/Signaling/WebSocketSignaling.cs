@@ -262,7 +262,7 @@ namespace Unity.RenderStreaming.Signaling
 
         private void WSConnected(object sender, EventArgs e)
         {
-            RenderStreaming.Logger.Log("Signaling: WS connected.");
+            RenderStreaming.Logger.Log($"Signaling: WS connected to {m_url}");
             m_mainThreadContext.Post(d => OnStart?.Invoke(this), null);
         }
 
@@ -274,7 +274,7 @@ namespace Unity.RenderStreaming.Signaling
 
         private void WSClosed(object sender, CloseEventArgs e)
         {
-            RenderStreaming.Logger.Log($"Signaling: WS connection closed, code: {e.Code}");
+            RenderStreaming.Logger.Log($"Signaling: WS connection to {m_url} closed, code: {e.Code}");
 
             m_wsCloseEvent.Set();
             m_webSocket = null;

@@ -279,7 +279,7 @@ namespace Unity.RenderStreaming
         {
             if (!runOnAwake || m_running || handlers.Count == 0)
                 return;
-
+			RenderStreaming.Logger.Log($"SignalingManager starting up on {GameObjectPath()}");
             var settings = m_useDefault ? RenderStreaming.GetSignalingSettings<SignalingSettings>() : signalingSettings;
             int i = 0;
             RTCIceServer[] iceServers = new RTCIceServer[settings.iceServers.Count()];
@@ -297,5 +297,16 @@ namespace Unity.RenderStreaming
         {
             Stop();
         }
+
+		private string GameObjectPath()
+		{
+			string path = "/" + this.gameObject.name;
+			Transform parent = this.gameObject.transform.parent;
+			while (parent != null) {
+				path = "/" + parent.gameObject.name + path;
+				parent = parent.parent;
+			}
+			return path;
+		}
     }
 }
